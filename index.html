@@ -1,14 +1,12 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Bass Dokus</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -17,25 +15,20 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
-    background: #f4f4f4;
     margin: 0;
+    background: #f4f4f4;
 }
 
 h1 {
-    font-size: 30px;
-    margin-bottom: 12px;
-}
-
-.pregunta {
-    font-size: 18px;
-    margin: 15px 0 25px;
+    margin-bottom: 8px;
 }
 
 #diapason {
     position: relative;
     width: 100%;
-    max-width: 1200px;
-    margin: auto;
+    max-width: 1280px;
+    margin: 20px auto;
+    line-height: 0;
 }
 
 #diapason img {
@@ -44,183 +37,168 @@ h1 {
     height: auto;
 }
 
+/* Círculos de las notas */
 .nota {
     position: absolute;
-    width: clamp(14px, 2.5vw, 28px);
-    height: clamp(14px, 2.5vw, 28px);
+    width: clamp(10px, 1.4vw, 18px);
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
-    border: 3px solid white;
+    border: 2px solid white;
     transform: translate(-50%, -50%);
     z-index: 5;
-    box-shadow: 0 0 8px rgba(0,0,0,0.6);
     pointer-events: none;
 }
 
-.verde {
+#tonica {
     background: #22c55e;
 }
 
-.azul {
+#notaAzul {
     background: #3b82f6;
 }
 
-#respuestas {
+/* Respuestas */
+#opciones {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
-    max-width: 650px;
-    margin: 25px auto;
+    grid-template-columns: repeat(4, minmax(65px, 140px));
+    justify-content: center;
+    gap: 9px;
+    margin: 22px auto;
+    padding: 0 10px;
 }
 
-.respuesta {
-    padding: 14px 5px;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
+#opciones button {
     background: #222;
     color: white;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.respuesta:hover:not(:disabled) {
-    background: #444;
-    transform: scale(1.04);
-}
-
-.respuesta:disabled {
-    cursor: default;
-    opacity: 0.8;
-}
-
-.correcta {
-    background: #16a34a !important;
-}
-
-.incorrecta {
-    background: #dc2626 !important;
-}
-
-#resultado {
-    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 8px;
+    font-size: 16px;
     font-weight: bold;
-    min-height: 30px;
-    margin: 20px;
+    cursor: pointer;
+    min-height: 44px;
+}
+
+#opciones button:hover {
+    background: #444;
+}
+
+#opciones button:disabled {
+    cursor: default;
+    opacity: 0.75;
+}
+
+#mensaje {
+    min-height: 28px;
+    font-weight: bold;
+    margin: 15px;
 }
 
 #nuevo {
     background: #2563eb;
     color: white;
     border: none;
-    padding: 14px 28px;
-    font-size: 17px;
     border-radius: 8px;
+    padding: 14px 25px;
+    font-size: 16px;
     cursor: pointer;
-    margin: 10px;
+    margin: 12px;
 }
 
 #nuevo:hover {
     background: #1d4ed8;
 }
 
-#estadisticas {
-    margin: 20px;
-    font-size: 17px;
+#marcador {
+    margin-top: 15px;
+    font-size: 15px;
 }
 
-#ayuda {
-    max-width: 700px;
-    margin: 15px auto;
+#explicacion {
+    font-size: 12px;
     color: #666;
-    font-size: 13px;
+    margin-top: 18px;
 }
 
-@media(max-width: 550px) {
+@media (max-width: 600px) {
     body {
-        padding: 10px;
+        padding: 8px;
     }
 
-    #respuestas {
+    #opciones {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 6px;
     }
 
-    .respuesta {
-        font-size: 15px;
-        padding: 12px 3px;
+    #opciones button {
+        font-size: 14px;
+        padding: 12px 4px;
     }
 }
-
 </style>
 </head>
 
 <body>
 
 <h1>🎸 Bass Dokus</h1>
-
-<p class="pregunta">
-¿Qué intervalo es la nota azul respecto a la verde?
-</p>
+<p>¿Qué intervalo es la nota azul respecto a la verde?</p>
 
 <div id="diapason">
+    <img id="imagenBajo" src="bass3.png" alt="Diapasón de bajo">
 
-    <img src="bass3.png" alt="Diapasón de bajo">
-
-    <div id="tonica" class="nota verde"></div>
-
-    <div id="notaAzul" class="nota azul"></div>
-
+    <div id="tonica" class="nota"></div>
+    <div id="notaAzul" class="nota"></div>
 </div>
 
-<div id="respuestas"></div>
+<div id="opciones"></div>
 
-<div id="resultado">
-    ¡Identifica el intervalo!
-</div>
+<div id="mensaje">¡Identifica el intervalo!</div>
 
 <button id="nuevo" onclick="nuevoEjercicio()">
     Nuevo ejercicio
 </button>
 
-<div id="estadisticas">
+<div id="marcador">
     Aciertos: <span id="aciertos">0</span>
     &nbsp; | &nbsp;
     Errores: <span id="errores">0</span>
 </div>
 
-<div id="ayuda">
-    Afinación estándar E-A-D-G · 20 trastes.
-    La nota verde es la referencia.
-</div>
+<p id="explicacion">
+    Afinación estándar E-A-D-G · 20 trastes. La nota verde es la referencia.
+</p>
 
 <script>
 
-// ==================================
-// CONFIGURACIÓN DEL BAJO
-// ==================================
+// ---------------------------------
+// CONFIGURACIÓN DEL DIAPASÓN
+// ---------------------------------
+
+const ANCHO_IMAGEN = 1280;
+const ALTO_IMAGEN = 720;
+
+// Posición de la cejuela en la imagen original
+const X_CEUELA = 1000;
+
+// Longitud de escala estimada en píxeles
+const LONGITUD_ESCALA = 1400;
+
+// Cuerdas: E, A, D, G
+// MIDI estándar: E1=28, A1=33, D2=38, G2=43
 
 const cuerdas = [
-    { nombre: "E", midi: 28 },
-    { nombre: "A", midi: 33 },
-    { nombre: "D", midi: 38 },
-    { nombre: "G", midi: 43 }
+    { nombre: "E", midi: 28, y: 421 },
+    { nombre: "A", midi: 33, y: 396 },
+    { nombre: "D", midi: 38, y: 370 },
+    { nombre: "G", midi: 43, y: 344 }
 ];
 
 const NUM_TRASTES = 20;
 
-const posicionesY = [
-    46.2,
-    50.8,
-    55.3,
-    59.7
-];
 
-const NUT_X = 78.4;
-const FINAL_X = 3.1;
-
-// ==================================
-// INTERVALOS DISPONIBLES
-// ==================================
+// ---------------------------------
+// INTERVALOS
+// ---------------------------------
 
 const intervalos = [
     { nombre: "T", semitonos: 0 },
@@ -240,247 +218,222 @@ const intervalos = [
     { nombre: "7", semitonos: 11 }
 ];
 
-// ==================================
-// VARIABLES DEL JUEGO
-// ==================================
 
-let notaVerde;
-let notaAzul;
+// ---------------------------------
+// POSICIÓN DE LOS TRASTES
+// ---------------------------------
+
+// Coordenada de cada barra de traste.
+// Los trastes se estrechan progresivamente
+// al alejarse de la cejuela.
+
+function limiteTraste(traste) {
+    return X_CEUELA -
+        LONGITUD_ESCALA *
+        (1 - Math.pow(2, -traste / 12));
+}
+
+
+// Centro del espacio donde se coloca la nota.
+
+function calcularX(traste) {
+
+    // Nota al aire: se coloca justo al lado de la cejuela.
+    if (traste === 0) {
+        return (X_CEUELA + 12) / ANCHO_IMAGEN * 100;
+    }
+
+    const derecha = limiteTraste(traste - 1);
+    const izquierda = limiteTraste(traste);
+
+    const centro = (derecha + izquierda) / 2;
+
+    return centro / ANCHO_IMAGEN * 100;
+}
+
+
+// ---------------------------------
+// OBTENER NOTA MIDI
+// ---------------------------------
+
+function obtenerMidi(posicion) {
+    return cuerdas[posicion.cuerda].midi + posicion.traste;
+}
+
+
+// ---------------------------------
+// CALCULAR INTERVALO
+// ---------------------------------
+
+function calcularIntervalo(posicionVerde, posicionAzul) {
+
+    const midiVerde = obtenerMidi(posicionVerde);
+    const midiAzul = obtenerMidi(posicionAzul);
+
+    return Math.abs(midiAzul - midiVerde) % 12;
+}
+
+
+// ---------------------------------
+// ELEGIR POSICIONES ALEATORIAS
+// ---------------------------------
+
+function posicionAleatoria() {
+
+    return {
+        cuerda: Math.floor(Math.random() * cuerdas.length),
+        traste: Math.floor(Math.random() * (NUM_TRASTES + 1))
+    };
+}
+
+
+// ---------------------------------
+// COLOCAR LOS CÍRCULOS
+// ---------------------------------
+
+function colocarNota(elemento, posicion) {
+
+    const x = calcularX(posicion.traste);
+    const y = cuerdas[posicion.cuerda].y / ALTO_IMAGEN * 100;
+
+    elemento.style.left = x + "%";
+    elemento.style.top = y + "%";
+}
+
+
+// ---------------------------------
+// VARIABLES DEL JUEGO
+// ---------------------------------
+
+let posicionVerde;
+let posicionAzul;
 let intervaloCorrecto;
 
 let aciertos = 0;
 let errores = 0;
 let respondido = false;
 
-// ==================================
-// CALCULAR POSICIÓN DEL TRASTE
-// ==================================
 
-function calcularX(traste) {
+// ---------------------------------
+// CREAR BOTONES
+// ---------------------------------
 
-    const escala =
-        (NUT_X - FINAL_X) /
-        (1 - Math.pow(2, -NUM_TRASTES));
+const contenedorOpciones = document.getElementById("opciones");
 
-    if (traste === 0) {
+intervalos.forEach(intervalo => {
 
-        const primerTraste =
-            NUT_X - escala * (1 - Math.pow(2, -1));
+    const boton = document.createElement("button");
 
-        return (NUT_X + primerTraste) / 2;
-    }
+    boton.textContent = intervalo.nombre;
 
-    const limiteAnterior =
-        NUT_X - escala *
-        (1 - Math.pow(2, -(traste - 1)));
-
-    const limiteActual =
-        NUT_X - escala *
-        (1 - Math.pow(2, -traste));
-
-    return (limiteAnterior + limiteActual) / 2;
-}
-
-// ==================================
-// POSICIÓN ALEATORIA
-// ==================================
-
-function posicionAleatoria() {
-
-    return {
-        cuerda: Math.floor(Math.random() * 4),
-        traste: Math.floor(Math.random() * 21)
+    boton.onclick = function() {
+        comprobarRespuesta(intervalo.nombre);
     };
 
-}
+    contenedorOpciones.appendChild(boton);
+});
 
-// ==================================
-// NOTA MIDI
-// ==================================
 
-function obtenerMidi(posicion) {
-
-    return cuerdas[posicion.cuerda].midi +
-           posicion.traste;
-
-}
-
-// ==================================
-// CALCULAR INTERVALO
-// ==================================
-
-function calcularIntervalo(verde, azul) {
-
-    const midiVerde = obtenerMidi(verde);
-    const midiAzul = obtenerMidi(azul);
-
-    return Math.abs(midiAzul - midiVerde) % 12;
-
-}
-
-// ==================================
-// COLOCAR CÍRCULOS
-// ==================================
-
-function colocarNota(elemento, posicion) {
-
-    const x = calcularX(posicion.traste);
-    const y = posicionesY[posicion.cuerda];
-
-    elemento.style.left = x + "%";
-    elemento.style.top = y + "%";
-
-}
-
-// ==================================
-// INTERVALOS EQUIVALENTES
-// ==================================
-
-function buscarIntervalos(semitonos) {
-
-    return intervalos.filter(
-        i => i.semitonos === semitonos
-    );
-
-}
-
-// ==================================
-// BOTONES DE RESPUESTA
-// ==================================
-
-function crearRespuestas() {
-
-    const contenedor =
-        document.getElementById("respuestas");
-
-    contenedor.innerHTML = "";
-
-    intervalos.forEach(intervalo => {
-
-        const boton = document.createElement("button");
-
-        boton.className = "respuesta";
-        boton.textContent = intervalo.nombre;
-
-        boton.onclick = () => comprobarRespuesta(
-            intervalo,
-            boton
-        );
-
-        contenedor.appendChild(boton);
-
-    });
-
-}
-
-// ==================================
+// ---------------------------------
 // NUEVO EJERCICIO
-// ==================================
+// ---------------------------------
 
 function nuevoEjercicio() {
 
     respondido = false;
 
-    document.getElementById("resultado").textContent =
+    document.getElementById("mensaje").textContent =
         "¡Identifica el intervalo!";
 
-    notaVerde = posicionAleatoria();
+    document.querySelectorAll("#opciones button").forEach(boton => {
+        boton.disabled = false;
+    });
 
-    do {
+    posicionVerde = posicionAleatoria();
+    posicionAzul = posicionAleatoria();
 
-        notaAzul = posicionAleatoria();
+    // Evitar que las dos notas estén exactamente
+    // en la misma cuerda y el mismo traste.
 
-    } while (
-        notaVerde.cuerda === notaAzul.cuerda &&
-        notaVerde.traste === notaAzul.traste
+    while (
+        posicionVerde.cuerda === posicionAzul.cuerda &&
+        posicionVerde.traste === posicionAzul.traste
+    ) {
+        posicionAzul = posicionAleatoria();
+    }
+
+    intervaloCorrecto = calcularIntervalo(
+        posicionVerde,
+        posicionAzul
     );
-
-    const semitonos =
-        calcularIntervalo(notaVerde, notaAzul);
-
-    intervaloCorrecto =
-        buscarIntervalos(semitonos);
 
     colocarNota(
         document.getElementById("tonica"),
-        notaVerde
+        posicionVerde
     );
 
     colocarNota(
         document.getElementById("notaAzul"),
-        notaAzul
+        posicionAzul
     );
-
-    crearRespuestas();
-
 }
 
-// ==================================
-// COMPROBAR RESPUESTA
-// ==================================
 
-function comprobarRespuesta(intervalo, boton) {
+// ---------------------------------
+// COMPROBAR RESPUESTA
+// ---------------------------------
+
+function comprobarRespuesta(respuesta) {
 
     if (respondido) return;
 
     respondido = true;
 
-    const correcta = intervaloCorrecto.some(
-        i => i.nombre === intervalo.nombre
+    const respuestasValidas = intervalos.filter(
+        intervalo => intervalo.semitonos === intervaloCorrecto
     );
 
-    const botones =
-        document.querySelectorAll(".respuesta");
+    const esCorrecta = respuestasValidas.some(
+        intervalo => intervalo.nombre === respuesta
+    );
 
-    botones.forEach(b => b.disabled = true);
-
-    if (correcta) {
+    if (esCorrecta) {
 
         aciertos++;
 
-        boton.classList.add("correcta");
+        document.getElementById("mensaje").textContent =
+            "¡Correcto! 🎉";
 
-        document.getElementById("resultado").textContent =
-            "✓ ¡Correcto! Muy bien.";
+        document.getElementById("mensaje").style.color =
+            "#16a34a";
 
     } else {
 
         errores++;
 
-        boton.classList.add("incorrecta");
-
-        const nombres = intervaloCorrecto
-            .map(i => i.nombre)
+        const nombresCorrectos = respuestasValidas
+            .map(intervalo => intervalo.nombre)
             .join(" / ");
 
-        document.getElementById("resultado").textContent =
-            "✗ La respuesta era: " + nombres;
+        document.getElementById("mensaje").textContent =
+            "Incorrecto. La respuesta es: " + nombresCorrectos;
 
-        botones.forEach(b => {
-
-            if (
-                intervaloCorrecto.some(
-                    i => i.nombre === b.textContent
-                )
-            ) {
-                b.classList.add("correcta");
-            }
-
-        });
-
+        document.getElementById("mensaje").style.color =
+            "#dc2626";
     }
 
-    document.getElementById("aciertos").textContent =
-        aciertos;
+    document.getElementById("aciertos").textContent = aciertos;
+    document.getElementById("errores").textContent = errores;
 
-    document.getElementById("errores").textContent =
-        errores;
-
+    document.querySelectorAll("#opciones button").forEach(boton => {
+        boton.disabled = true;
+    });
 }
 
-// ==================================
-// INICIAR APLICACIÓN
-// ==================================
+
+// ---------------------------------
+// INICIAR JUEGO
+// ---------------------------------
 
 nuevoEjercicio();
 
