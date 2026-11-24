@@ -529,7 +529,19 @@ function comprobarRespuesta(respuesta) {
 // ======================================
 // INICIAR
 // ======================================
+function cambiarNivel(nivel) {
 
+    nivelActual = nivel;
+
+    document.querySelectorAll(".nivel").forEach(boton => {
+        boton.classList.remove("activo");
+    });
+
+    document.querySelectorAll(".nivel")[nivel - 1]
+        .classList.add("activo");
+
+    nuevoEjercicio();
+}
 nuevoEjercicio();
 
 </script>
