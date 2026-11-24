@@ -1,43 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Bass Dokus</title>
 
 <style>
 
-body{
-font-family:Arial,sans-serif;
-text-align:center;
-padding:20px;
-background:#f4f4f4;
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background: #f4f4f4;
 }
 
-img{
-max-width:1200px;
-width:100%;
-}
-#diapason{
-position:relative;
-display:inline-block;
+h1 {
+    margin-bottom: 20px;
 }
 
-#tonica{
-position:absolute;
-width:30px;
-height:30px;
-background:#22c55e;
-border-radius:50%;
-left:200px;
-top:100px;
-border:3px solid white;
+p {
+    font-size: 18px;
+}
+
+#diapason {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+#diapason img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.nota {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid white;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+}
+
+#tonica {
+    background: #22c55e;
+    left: 6.4%;
+    top: 52%;
+}
+
+#notaAzul {
+    background: #3b82f6;
+    left: 18%;
+    top: 52%;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -48,8 +71,15 @@ border:3px solid white;
 ¿Qué intervalo es la nota azul respecto a la verde?
 </p>
 
-<img src="bass3.png">
+<div id="diapason">
+
+    <img src="bass3.png" alt="Diapasón de bajo">
+
+    <div id="tonica" class="nota"></div>
+
+    <div id="notaAzul" class="nota"></div>
+
+</div>
 
 </body>
-
 </html>
