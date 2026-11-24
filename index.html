@@ -160,6 +160,32 @@ h1 {
         padding: 12px 4px;
     }
 }
+#niveles {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px auto;
+}
+
+.nivel {
+    background: #ddd;
+    color: #222;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nivel.activo {
+    background: #2563eb;
+    color: white;
+}
+
+.nivel:hover {
+    filter: brightness(0.92);
+}    
 </style>
 </head>
 
@@ -174,7 +200,11 @@ h1 {
     <div id="tonica" class="nota"></div>
     <div id="notaAzul" class="nota"></div>
 </div>
-
+<div id="niveles">
+    <button class="nivel activo" onclick="cambiarNivel(1)">Nivel 1</button>
+    <button class="nivel" onclick="cambiarNivel(2)">Nivel 2</button>
+    <button class="nivel" onclick="cambiarNivel(3)">Nivel 3</button>
+</div>
 <div id="opciones"></div>
 
 <div id="mensaje">¡Identifica el intervalo!</div>
@@ -349,7 +379,13 @@ let intervaloCorrecto;
 let aciertos = 0;
 let errores = 0;
 let respondido = false;
+let nivelActual = 1;
 
+const distanciasNivel = {
+    1: 2,
+    2: 5,
+    3: 20
+};
 
 // ======================================
 // CREAR BOTONES
