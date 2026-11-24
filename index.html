@@ -421,29 +421,37 @@ function nuevoEjercicio() {
     mensaje.textContent = "¡Identifica el intervalo!";
     mensaje.style.color = "#222";
 
-    // Limpiar colores anteriores.
     document.querySelectorAll("#opciones button").forEach(boton => {
         boton.disabled = false;
         boton.classList.remove("correcta", "incorrecta");
     });
 
+    // Elegir posición verde
     posicionVerde = posicionAleatoria();
-    posicionAzul = posicionAleatoria();
 
-    // Evitar que ambas notas estén en el mismo sitio.
+    // Distancia máxima según el nivel
+    const distanciaMaxima = distanciasNivel[nivelActual];
 
-    while (
-        posicionVerde.cuerda === posicionAzul.cuerda &&
-        posicionVerde.traste === posicionAzul.traste
-    ) {
+    // Buscar una posición azul válida
+    do {
         posicionAzul = posicionAleatoria();
-    }
 
+    } while (
+        Math.abs(posicionAzul.traste - posicionVerde.traste) > distanciaMaxima
+        ||
+        (
+            posicionAzul.cuerda === posicionVerde.cuerda &&
+            posicionAzul.traste === posicionVerde.traste
+        )
+    );
+
+    // Calcular intervalo
     intervaloCorrecto = calcularIntervalo(
         posicionVerde,
         posicionAzul
     );
 
+    // Colocar los puntos
     colocarNota(
         document.getElementById("tonica"),
         posicionVerde
@@ -454,7 +462,6 @@ function nuevoEjercicio() {
         posicionAzul
     );
 }
-
 
 // ======================================
 // COMPROBAR RESPUESTA Y COLOREAR BOTONES
