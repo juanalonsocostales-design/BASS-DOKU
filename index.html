@@ -258,4 +258,238 @@ const intervalos = [
     { nombre: "b5", semitonos: 6 },
     { nombre: "5", semitonos: 7 },
     { nombre: "5#", semitonos: 8 },
-    { nombre: "b
+    { nombre: "b6", semitonos: 8 },
+    { nombre: "6", semitonos: 9 },
+    { nombre: "bb7", semitonos: 9 },
+    { nombre: "b7", semitonos: 10 },
+    { nombre: "7", semitonos: 11 }
+];
+
+
+// ======================================
+// CALCULAR POSICIÓN HORIZONTAL
+// ======================================
+
+function calcularX(traste) {
+
+    // Cuerda al aire: justo detrás de la cejuela.
+    if (traste === 0) {
+        return 1005 / ANCHO_IMAGEN * 100;
+    }
+
+    // Centro exacto del espacio entre dos barras.
+    const barraDerecha = limitesTrastes[traste - 1];
+    const barraIzquierda = limitesTrastes[traste];
+
+    const centro = (barraDerecha + barraIzquierda) / 2;
+
+    return centro / ANCHO_IMAGEN * 100;
+}
+
+
+// ======================================
+// CALCULAR POSICIÓN VERTICAL
+// ======================================
+
+function calcularY(cuerda) {
+    return cuerdas[cuerda].y / ALTO_IMAGEN * 100;
+}
+
+
+// ======================================
+// MIDI
+// ======================================
+
+function obtenerMidi(posicion) {
+    return cuerdas[posicion.cuerda].midi + posicion.traste;
+}
+
+function calcularIntervalo(verde, azul) {
+    const notaVerde = obtenerMidi(verde);
+    const notaAzul = obtenerMidi(azul);
+
+    return Math.abs(notaAzul - notaVerde) % 12;
+}
+
+
+// ======================================
+// POSICIÓN ALEATORIA
+// ======================================
+
+function posicionAleatoria() {
+    return {
+        cuerda: Math.floor(Math.random() * 4),
+        traste: Math.floor(Math.random() * (NUM_TRASTES + 1))
+    };
+}
+
+
+// ======================================
+// COLOCAR MARCADORES
+// ======================================
+
+function colocarNota(elemento, posicion) {
+
+    const x = calcularX(posicion.traste);
+    const y = calcularY(posicion.cuerda);
+
+    elemento.style.left = x + "%";
+    elemento.style.top = y + "%";
+}
+
+
+// ======================================
+// VARIABLES DEL JUEGO
+// ======================================
+
+let posicionVerde;
+let posicionAzul;
+let intervaloCorrecto;
+
+let aciertos = 0;
+let errores = 0;
+let respondido = false;
+
+
+// ======================================
+// CREAR BOTONES
+// ======================================
+
+const contenedorOpciones = document.getElementById("opciones");
+
+intervalos.forEach(intervalo => {
+
+    const boton = document.createElement("button");
+
+    boton.textContent = intervalo.nombre;
+    boton.dataset.nombre = intervalo.nombre;
+
+    boton.onclick = function() {
+        comprobarRespuesta(intervalo.nombre);
+    };
+
+    contenedorOpciones.appendChild(boton);
+});
+
+
+// ======================================
+// NUEVO EJERCICIO
+// ======================================
+
+function nuevoEjercicio() {
+
+    respondido = false;
+
+    const mensaje = document.getElementById("mensaje");
+
+    mensaje.textContent = "¡Identifica el intervalo!";
+    mensaje.style.color = "#222";
+
+    // Limpiar colores anteriores.
+    document.querySelectorAll("#opciones button").forEach(boton => {
+        boton.disabled = false;
+        boton.classList.remove("correcta", "incorrecta");
+    });
+
+    posicionVerde = posicionAleatoria();
+    posicionAzul = posicionAleatoria();
+
+    // Evitar que ambas notas estén en el mismo sitio.
+
+    while (
+        posicionVerde.cuerda === posicionAzul.cuerda &&
+        posicionVerde.traste === posicionAzul.traste
+    ) {
+        posicionAzul = posicionAleatoria();
+    }
+
+    intervaloCorrecto = calcularIntervalo(
+        posicionVerde,
+        posicionAzul
+    );
+
+    colocarNota(
+        document.getElementById("tonica"),
+        posicionVerde
+    );
+
+    colocarNota(
+        document.getElementById("notaAzul"),
+        posicionAzul
+    );
+}
+
+
+// ======================================
+// COMPROBAR RESPUESTA Y COLOREAR BOTONES
+// ======================================
+
+function comprobarRespuesta(respuesta) {
+
+    if (respondido) return;
+
+    respondido = true;
+
+    const respuestasValidas = intervalos.filter(
+        intervalo => intervalo.semitonos === intervaloCorrecto
+    );
+
+    const nombresCorrectos = respuestasValidas.map(
+        intervalo => intervalo.nombre
+    );
+
+    const esCorrecta = nombresCorrectos.includes(respuesta);
+
+    // Marcar las respuestas correctas en verde.
+    document.querySelectorAll("#opciones button").forEach(boton => {
+
+        const nombre = boton.dataset.nombre;
+
+        if (nombresCorrectos.includes(nombre)) {
+            boton.classList.add("correcta");
+        }
+
+        // Si el usuario eligió una respuesta incorrecta,
+        // marcar su botón en rojo.
+        if (nombre === respuesta && !esCorrecta) {
+            boton.classList.add("incorrecta");
+        }
+
+        boton.disabled = true;
+    });
+
+    const mensaje = document.getElementById("mensaje");
+
+    if (esCorrecta) {
+
+        aciertos++;
+
+        mensaje.textContent = "¡Correcto! 🎉";
+        mensaje.style.color = "#16a34a";
+
+    } else {
+
+        errores++;
+
+        mensaje.textContent =
+            "Incorrecto. La respuesta correcta es: " +
+            nombresCorrectos.join(" / ");
+
+        mensaje.style.color = "#dc2626";
+    }
+
+    document.getElementById("aciertos").textContent = aciertos;
+    document.getElementById("errores").textContent = errores;
+}
+
+
+// ======================================
+// INICIAR
+// ======================================
+
+nuevoEjercicio();
+
+</script>
+
+</body>
+</html>
