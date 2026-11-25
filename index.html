@@ -39,24 +39,34 @@ h1 {
 
 /* Marcadores */
 
-.nota {
+.nota{
     position:absolute;
-    width:18px;
-    height:18px;
-    border:2px solid white;
+    width:24px;
+    height:24px;
     border-radius:50%;
     transform:translate(-50%,-50%);
     z-index:5;
     pointer-events:none;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:13px;
+    font-weight:bold;
+    color:white;
 }
 }
 
-#tonica {
-    background: #22c55e;
+#tonica{
+    background:#22c55e;
+    border:2px solid white;
+    box-shadow:0 0 6px rgba(0,0,0,.4);
 }
-
-#notaAzul {
-    background: #3b82f6;
+##notaAzul{
+    background:#3b82f6;
+    border:2px solid white;
+    box-shadow:0 0 6px rgba(0,0,0,.4);
 }
 
 /* Botones de respuesta */
@@ -198,7 +208,7 @@ h1 {
 <div id="diapason">
     <div id="debug"></div>
     <img id="imagenBajo" src="bass3.png" alt="Diapasón de bajo">
-    <div id="tonica" class="nota"></div>
+    <div id="tonica" class="nota">T</div>
     <div id="notaAzul" class="nota"></div>
 </div>
 <div id="niveles">
