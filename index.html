@@ -535,19 +535,14 @@ function colocarNota(elemento, posicion) {
     const x = calcularX(posicion.traste);
     const y = calcularY(posicion.cuerda, x);
 
-    console.log(
-        elemento.id,
-        "traste:",
-        posicion.traste,
-        "x:",
-        x
-    );
-
     elemento.style.left = x + "%";
     elemento.style.top = y + "%";
 
-    elemento.textContent =
-        posicion.traste;
+    if (elemento.id === "tonica") {
+        elemento.textContent = "T";
+    } else {
+        elemento.textContent = "?";
+    }
 }
 
 
