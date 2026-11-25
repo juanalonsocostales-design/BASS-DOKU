@@ -222,7 +222,7 @@ h1 {
 <div id="opciones"></div>
 
 <div id="mensaje">¡Identifica el intervalo!</div>
-<div id="debug"></div>
+
 <button id="nuevo" onclick="nuevoEjercicio()">
     Nuevo ejercicio
 </button>
@@ -660,21 +660,7 @@ console.log(
     "AZUL OBJETO",
     posicionAzul
 );    
-document.getElementById("debug").innerHTML =
-`
-VERDE:
-${JSON.stringify(posicionVerde)}
-
-<br><br>
-
-AZUL:
-${JSON.stringify(posicionAzul)}
-
-<br><br>
-
-INTERVALO:
-${intervaloCorrecto}
-`;    
+  
 console.log("VERDE", posicionVerde);
 
 console.log(
