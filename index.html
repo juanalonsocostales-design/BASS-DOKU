@@ -196,6 +196,7 @@ h1 {
 <p>¿Qué intervalo es la nota azul respecto a la verde?</p>
 
 <div id="diapason">
+    <div id="debug"></div>
     <img id="imagenBajo" src="bass3.png" alt="Diapasón de bajo">
     <div id="tonica" class="nota"></div>
     <div id="notaAzul" class="nota"></div>
@@ -208,7 +209,7 @@ h1 {
 <div id="opciones"></div>
 
 <div id="mensaje">¡Identifica el intervalo!</div>
-
+<div id="debug"></div>
 <button id="nuevo" onclick="nuevoEjercicio()">
     Nuevo ejercicio
 </button>
@@ -451,6 +452,25 @@ function nuevoEjercicio() {
         posicionVerde,
         posicionAzul
     );
+document.getElementById("debug").innerHTML =
+`
+VERDE:
+${cuerdas[posicionVerde.cuerda].nombre}
+ cuerda
+ traste ${posicionVerde.traste}
+
+<br><br>
+
+AZUL:
+${cuerdas[posicionAzul.cuerda].nombre}
+ cuerda
+ traste ${posicionAzul.traste}
+
+<br><br>
+
+INTERVALO:
+${intervaloCorrecto}
+`;    
 console.log("VERDE", posicionVerde);
 
 console.log(
@@ -557,9 +577,9 @@ function cambiarNivel(nivel) {
 
     document.querySelectorAll(".nivel")[nivel - 1]
         .classList.add("activo");
-
     nuevoEjercicio();
 }
+    
 nuevoEjercicio();
 
 </script>
