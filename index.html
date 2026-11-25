@@ -580,8 +580,16 @@ function nuevoEjercicio() {
         boton.classList.remove("correcta", "incorrecta");
     });
 
-    // Elegir posición verde
+   / Elegir posición verde
 posicionVerde = posicionAleatoria();
+
+const intervaloElegido =
+    intervalos[
+        Math.floor(
+            Math.random() *
+            intervalos.length
+        )
+    ];
 
 intervaloCorrecto =
     intervaloElegido.nombre;
@@ -594,12 +602,16 @@ do {
     posicionAzul =
         console.log(
 "AZUL",
-posicionAzul
+posicionAzul =
+    obtenerPosicionPatron(
+        posicionVerde,
+        intervaloCorrecto
+    );
+
+console.log(
+    "AZUL",
+    posicionAzul
 );
-        obtenerPosicionPatron(
-            posicionVerde,
-            intervaloCorrecto
-        );
 
 }
 while(!posicionAzul);
