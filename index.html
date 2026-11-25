@@ -707,10 +707,31 @@ console.log(
 
     respondido = true;
 
-   const respuestasValidas = [
-    {nombre: intervaloCorrecto}
-];
+   let respuestasValidas = [];
 
+if(intervaloCorrecto === "b5"){
+    respuestasValidas = [
+        {nombre:"b5"},
+        {nombre:"4#"}
+    ];
+}
+else if(intervaloCorrecto === "b6"){
+    respuestasValidas = [
+        {nombre:"b6"},
+        {nombre:"5#"}
+    ];
+}
+else if(intervaloCorrecto === "6"){
+    respuestasValidas = [
+        {nombre:"6"},
+        {nombre:"bb7"}
+    ];
+}
+else{
+    respuestasValidas = [
+        {nombre:intervaloCorrecto}
+    ];
+}
     const nombresCorrectos = respuestasValidas.map(
         intervalo => intervalo.nombre
     );
