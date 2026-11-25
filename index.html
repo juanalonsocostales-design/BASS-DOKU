@@ -470,6 +470,40 @@ function obtenerPosicionPatron(
     const patron =
         patrones[nombreIntervalo][0];
 
+    const nuevaCuerda =
+        verde.cuerda +
+        patron.cuerda;
+
+    const nuevoTraste =
+        verde.traste +
+        patron.traste;
+
+    if(
+        nuevaCuerda < 0 ||
+        nuevaCuerda > 3
+    ){
+        return null;
+    }
+
+    if(
+        nuevoTraste < 0 ||
+        nuevoTraste > NUM_TRASTES
+    ){
+        return null;
+    }
+
+    return {
+
+        cuerda:nuevaCuerda,
+        traste:nuevoTraste
+
+    };
+
+}
+
+    const patron =
+        patrones[nombreIntervalo][0];
+
     return {
 
         cuerda:
@@ -570,11 +604,19 @@ const intervaloElegido =
 intervaloCorrecto =
     intervaloElegido.nombre;
 
-posicionAzul =
-    obtenerPosicionPatron(
-        posicionVerde,
-        intervaloCorrecto
-    );
+do {
+
+    posicionVerde =
+        posicionAleatoria();
+
+    posicionAzul =
+        obtenerPosicionPatron(
+            posicionVerde,
+            intervaloCorrecto
+        );
+
+}
+while(!posicionAzul);
 
 
     // Calcular intervalo
