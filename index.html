@@ -656,19 +656,24 @@ while(!posicionAzul);
 
 intervaloCorrecto =
     semitonosANombre(semitonos);
+console.log(
+    "VERDE OBJETO",
+    posicionVerde
+);
+
+console.log(
+    "AZUL OBJETO",
+    posicionAzul
+);    
 document.getElementById("debug").innerHTML =
 `
 VERDE:
-${cuerdas[posicionVerde.cuerda].nombre}
- cuerda
- traste ${posicionVerde.traste}
+${JSON.stringify(posicionVerde)}
 
 <br><br>
 
 AZUL:
-${cuerdas[posicionAzul.cuerda].nombre}
- cuerda
- traste ${posicionAzul.traste}
+${JSON.stringify(posicionAzul)}
 
 <br><br>
 
