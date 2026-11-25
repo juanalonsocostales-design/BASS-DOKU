@@ -333,7 +333,69 @@ const intervalos = [
     { nombre: "b7", semitonos: 10 },
     { nombre: "7", semitonos: 11 }
 ];
+const patrones = {
 
+"T":[
+    {cuerda:0,traste:0}
+],
+
+"b2":[
+    {cuerda:0,traste:1}
+],
+
+"2":[
+    {cuerda:0,traste:2}
+],
+
+"b3":[
+    {cuerda:0,traste:3}
+],
+
+"3":[
+    {cuerda:0,traste:4}
+],
+
+"4":[
+    {cuerda:1,traste:0}
+],
+
+"4#":[
+    {cuerda:1,traste:1}
+],
+
+"b5":[
+    {cuerda:1,traste:1}
+],
+
+"5":[
+    {cuerda:1,traste:2}
+],
+
+"5#":[
+    {cuerda:1,traste:3}
+],
+
+"b6":[
+    {cuerda:1,traste:3}
+],
+
+"6":[
+    {cuerda:1,traste:4}
+],
+
+"bb7":[
+    {cuerda:1,traste:4}
+],
+
+"b7":[
+    {cuerda:2,traste:0}
+],
+
+"7":[
+    {cuerda:2,traste:1}
+]
+
+};
 
 // ======================================
 // CALCULAR POSICIÓN HORIZONTAL
@@ -400,7 +462,27 @@ function posicionAleatoria() {
         traste: Math.floor(Math.random() * (NUM_TRASTES + 1))
     };
 }
+function obtenerPosicionPatron(
+    verde,
+    nombreIntervalo
+){
 
+    const patron =
+        patrones[nombreIntervalo][0];
+
+    return {
+
+        cuerda:
+            verde.cuerda +
+            patron.cuerda,
+
+        traste:
+            verde.traste +
+            patron.traste
+
+    };
+
+}
 
 // ======================================
 // COLOCAR MARCADORES
@@ -475,8 +557,24 @@ function nuevoEjercicio() {
     });
 
     // Elegir posición verde
-    posicionVerde = posicionAleatoria();
+posicionVerde = posicionAleatoria();
 
+const intervaloElegido =
+    intervalos[
+        Math.floor(
+            Math.random() *
+            intervalos.length
+        )
+    ];
+
+intervaloCorrecto =
+    intervaloElegido.nombre;
+
+posicionAzul =
+    obtenerPosicionPatron(
+        posicionVerde,
+        intervaloCorrecto
+    );
     // Distancia máxima según el nivel
     const distanciaMaxima = distanciasNivel[nivelActual];
 
