@@ -535,8 +535,11 @@ function colocarNota(elemento, posicion) {
     const x = calcularX(posicion.traste);
     const y = calcularY(posicion.cuerda, x);
 
-    elemento.style.left = x + "%";
-    elemento.style.top = y + "%";
+elemento.style.left = x + "%";
+elemento.style.top = y + "%";
+
+elemento.textContent =
+    cuerdas[posicion.cuerda].nombre;
 }
 
 
