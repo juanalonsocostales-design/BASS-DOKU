@@ -335,10 +335,11 @@ function obtenerMidi(posicion) {
 }
 
 function calcularIntervalo(verde, azul) {
+
     const notaVerde = obtenerMidi(verde);
     const notaAzul = obtenerMidi(azul);
 
-    return Math.abs(notaAzul - notaVerde) % 12;
+    return (notaAzul - notaVerde + 12) % 12;
 }
 
 
