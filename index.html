@@ -514,7 +514,12 @@ function obtenerPosicionPatron(
     ){
         return null;
     }
-
+if(
+    nuevaCuerda === verde.cuerda &&
+    nuevoTraste === verde.traste
+){
+    return null;
+}
     return {
 
         cuerda:nuevaCuerda,
