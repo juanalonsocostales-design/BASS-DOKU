@@ -450,7 +450,25 @@ function calcularIntervalo(verde, azul) {
 
     return (notaAzul - notaVerde + 12) % 12;
 }
+function semitonosANombre(semitonos){
 
+    const mapa = {
+        0:"T",
+        1:"b2",
+        2:"2",
+        3:"b3",
+        4:"3",
+        5:"4",
+        6:"b5",
+        7:"5",
+        8:"b6",
+        9:"6",
+        10:"b7",
+        11:"7"
+    };
+
+    return mapa[semitonos];
+}
 
 // ======================================
 // POSICIÓN ALEATORIA
@@ -620,10 +638,13 @@ while(!posicionAzul);
 
 
     // Calcular intervalo
-    intervaloCorrecto = calcularIntervalo(
-        posicionVerde,
-        posicionAzul
-    );
+    const semitonos = calcularIntervalo(
+    posicionVerde,
+    posicionAzul
+);
+
+intervaloCorrecto =
+    semitonosANombre(semitonos);
 document.getElementById("debug").innerHTML =
 `
 VERDE:
