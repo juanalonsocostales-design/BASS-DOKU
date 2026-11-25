@@ -457,9 +457,15 @@ function calcularIntervalo(verde, azul) {
 // ======================================
 
 function posicionAleatoria() {
+
     return {
-        cuerda: Math.floor(Math.random() * 2),
-        traste: Math.floor(Math.random() * (NUM_TRASTES + 1))
+
+        cuerda:
+            Math.floor(Math.random() * 2),
+
+        traste:
+            Math.floor(Math.random() * 15)
+
     };
 }
 function obtenerPosicionPatron(
