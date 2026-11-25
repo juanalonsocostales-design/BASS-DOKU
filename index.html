@@ -458,7 +458,7 @@ function calcularIntervalo(verde, azul) {
 
 function posicionAleatoria() {
     return {
-        cuerda: Math.floor(Math.random() * 4),
+        cuerda: Math.floor(Math.random() * 2),
         traste: Math.floor(Math.random() * (NUM_TRASTES + 1))
     };
 }
@@ -575,21 +575,7 @@ posicionAzul =
         posicionVerde,
         intervaloCorrecto
     );
-    // Distancia máxima según el nivel
-    const distanciaMaxima = distanciasNivel[nivelActual];
 
-    // Buscar una posición azul válida
-    do {
-        posicionAzul = posicionAleatoria();
-
-    } while (
-        Math.abs(posicionAzul.traste - posicionVerde.traste) > distanciaMaxima
-        ||
-        (
-            posicionAzul.cuerda === posicionVerde.cuerda &&
-            posicionAzul.traste === posicionVerde.traste
-        )
-    );
 
     // Calcular intervalo
     intervaloCorrecto = calcularIntervalo(
@@ -655,9 +641,9 @@ function comprobarRespuesta(respuesta) {
 
     respondido = true;
 
-    const respuestasValidas = intervalos.filter(
-        intervalo => intervalo.semitonos === intervaloCorrecto
-    );
+   const respuestasValidas = [
+    {nombre: intervaloCorrecto}
+];
 
     const nombresCorrectos = respuestasValidas.map(
         intervalo => intervalo.nombre
