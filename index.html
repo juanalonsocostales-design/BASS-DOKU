@@ -717,11 +717,22 @@ const posicionesPosibles =
         posicionVerde.traste
     );  
 
-   posicionAzul =
-    obtenerPosicionPatron(
-        posicionVerde,
-        intervaloCorrecto
-    );
+if(
+    posicionesFiltradas.length === 0
+){
+    posicionAzul = null;
+}
+else{
+
+    posicionAzul =
+        posicionesFiltradas[
+            Math.floor(
+                Math.random() *
+                posicionesFiltradas.length
+            )
+        ];
+
+}
 
 }
 while(!posicionAzul);
