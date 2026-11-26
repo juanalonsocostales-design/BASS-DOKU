@@ -714,29 +714,18 @@ const posicionesPosibles =
         posicionVerde.traste
     );  
 
-const posicionesValidas =
-    posicionesFiltradas.filter(
-        pos =>
-
-            !(
-                pos.cuerda === posicionVerde.cuerda &&
-                pos.traste === posicionVerde.traste
-            )
-
-    );
-
 if(
-    posicionesValidas.length === 0
+    posicionesFiltradas.length === 0
 ){
     posicionAzul = null;
 }
 else{
 
     posicionAzul =
-        posicionesValidas[
+        posicionesFiltradas[
             Math.floor(
                 Math.random() *
-                posicionesValidas.length
+                posicionesFiltradas.length
             )
         ];
 
