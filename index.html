@@ -323,10 +323,13 @@ const intervalos = [
     { nombre: "b3", semitonos: 3 },
     { nombre: "3", semitonos: 4 },
     { nombre: "4", semitonos: 5 },
-    { nombre: "4#/b5", semitonos: 6 },
+    { nombre: "4#", semitonos: 6 },
+    { nombre: "b5", semitonos: 6 },
     { nombre: "5", semitonos: 7 },
-    { nombre: "5#/b6", semitonos: 8 },
-    { nombre: "6/bb7", semitonos: 9 },
+    { nombre: "5#", semitonos: 8 },
+    { nombre: "b6", semitonos: 8 },
+    { nombre: "6", semitonos: 9 },
+    { nombre: "bb7", semitonos: 9 },
     { nombre: "b7", semitonos: 10 },
     { nombre: "7", semitonos: 11 }
 ];
@@ -510,19 +513,19 @@ function calcularIntervalo(verde, azul) {
 function semitonosANombre(semitonos){
 
     const mapa = {
-    0:"T",
-    1:"b2",
-    2:"2",
-    3:"b3",
-    4:"3",
-    5:"4",
-    6:"4#/b5",
-    7:"5",
-    8:"5#/b6",
-    9:"6/bb7",
-    10:"b7",
-    11:"7"
-};
+        0:"T",
+        1:"b2",
+        2:"2",
+        3:"b3",
+        4:"3",
+        5:"4",
+        6:"b5",
+        7:"5",
+        8:"b6",
+        9:"6",
+        10:"b7",
+        11:"7"
+    };
 
     return mapa[semitonos];
 }
@@ -704,40 +707,66 @@ do {
     const midiObjetivo =
         midiVerde +
         semitonosIntervalo;
-const posicionesPosibles =
-    buscarPosicionesMidi(
-        midiObjetivo
+
+   posicionAzul =
+    obtenerPosicionPatron(
+        posicionVerde,
+        intervaloCorrecto
     );
- const posicionesFiltradas =
-    filtrarPorNivel(
-        posicionesPosibles,
-        posicionVerde.traste
-    );  
 
-if(
-    posicionesFiltradas.length === 0
-){
-    posicionAzul = null;
-}
-else{
+console.log(
+    "AZUL",
+    posicionAzul
+);
 
-    posicionAzul =
-        posicionesFiltradas[
-            Math.floor(
-                Math.random() *
-                posicionesFiltradas.length
-            )
-        ];
+console.log(
+    "AZUL",
+    posicionAzul
+);
 
-console.log("VERDE", posicionVerde);
-console.log("AZUL", posicionAzul);
-console.log("FILTRADAS", posicionesFiltradas);
-    
 }
 while(!posicionAzul);
 
-    // Colocar los puntos
 
+    // Calcular intervalo
+    const semitonos = calcularIntervalo(
+    posicionVerde,
+    posicionAzul
+);
+
+intervaloCorrecto =
+    semitonosANombre(semitonos);
+console.log(
+    "VERDE OBJETO",
+    posicionVerde
+);
+
+console.log(
+    "AZUL OBJETO",
+    posicionAzul
+);    
+  
+console.log("VERDE", posicionVerde);
+
+console.log(
+    "MIDI VERDE",
+    obtenerMidi(posicionVerde)
+);
+
+console.log("AZUL", posicionAzul);
+
+console.log(
+    "MIDI AZUL",
+    obtenerMidi(posicionAzul)
+);
+
+console.log(
+    "INTERVALO",
+    intervaloCorrecto
+);
+    // Colocar los puntos
+    console.log("VERDE", posicionVerde);
+console.log("AZUL", posicionAzul);
     colocarNota(
         document.getElementById("tonica"),
         posicionVerde
