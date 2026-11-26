@@ -755,38 +755,40 @@ const posicionesFiltradas =
         posicionesPosibles,
         posicionVerde.traste
     );
+    
+   
 const posicionesSuperiores =
     posicionesFiltradas.filter(
         pos => pos.cuerda > posicionVerde.cuerda
     );
-    
-console.table(
-    posicionesFiltradas
-);
 
-console.log(
-    "VERDE",
-    posicionVerde
-);
-    
-const posicionesSuperiores =
-    posicionesFiltradas.filter(
-        pos => pos.cuerda > posicionVerde.cuerda
-    );
-console.table(
-    posicionesFiltradas
-);    
 if(
     posicionesFiltradas.length === 0
 ){
     posicionAzul = null;
 }
+else if(
+    posicionesSuperiores.length > 0
+){
+
+    posicionAzul =
+        posicionesSuperiores[
+            Math.floor(
+                Math.random() *
+                posicionesSuperiores.length
+            )
+        ];
+
+}
 else{
 
-   posicionAzul =
-    posicionesFiltradas[
-        posicionesFiltradas.length - 1
-    ];
+    posicionAzul =
+        posicionesFiltradas[
+            Math.floor(
+                Math.random() *
+                posicionesFiltradas.length
+            )
+        ];
 
 }
     
