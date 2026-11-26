@@ -848,22 +848,36 @@ function comprobarRespuesta(respuesta) {
 
    let respuestasValidas = [];
 
-if(intervaloCorrecto === "b5"){
+if(
+    intervaloCorrecto === "b5" ||
+    intervaloCorrecto === "4#"
+){
     respuestasValidas = [
         {nombre:"b5"},
         {nombre:"4#"}
     ];
 }
-else if(intervaloCorrecto === "b6"){
+else if(
+    intervaloCorrecto === "b6" ||
+    intervaloCorrecto === "5#"
+){
     respuestasValidas = [
         {nombre:"b6"},
         {nombre:"5#"}
     ];
 }
-else if(intervaloCorrecto === "6"){
+else if(
+    intervaloCorrecto === "6" ||
+    intervaloCorrecto === "bb7"
+){
     respuestasValidas = [
         {nombre:"6"},
         {nombre:"bb7"}
+    ];
+}
+else{
+    respuestasValidas = [
+        {nombre:intervaloCorrecto}
     ];
 }
 else{
