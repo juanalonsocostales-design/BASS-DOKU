@@ -482,6 +482,27 @@ function obtenerSemitonosIntervalo(nombreIntervalo){
     return intervalo.semitonos;
 
 }    
+function filtrarPorNivel(
+    posiciones,
+    trasteTonica
+){
+
+    return posiciones.filter(pos => {
+
+        const distancia =
+            Math.abs(
+                pos.traste -
+                trasteTonica
+            );
+
+        return (
+            distancia <=
+            distanciaMaxima[nivelActual]
+        );
+
+    });
+
+}    
 function calcularIntervalo(verde, azul) {
 
     const notaVerde = obtenerMidi(verde);
