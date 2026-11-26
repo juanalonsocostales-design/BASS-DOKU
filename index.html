@@ -442,7 +442,37 @@ function calcularY(cuerda, xPct){
 function obtenerMidi(posicion) {
     return cuerdas[posicion.cuerda].midi + posicion.traste;
 }
+function buscarPosicionesMidi(midiObjetivo){
 
+    const posiciones = [];
+
+    for(let cuerda = 0; cuerda < 4; cuerda++){
+
+        for(let traste = 0; traste <= NUM_TRASTES; traste++){
+
+            const midi =
+                cuerdas[cuerda].midi +
+                traste;
+
+            if(midi === midiObjetivo){
+
+                posiciones.push({
+
+                    cuerda:cuerda,
+
+                    traste:traste
+
+                });
+
+            }
+
+        }
+
+    }
+
+    return posiciones;
+
+}
 function calcularIntervalo(verde, azul) {
 
     const notaVerde = obtenerMidi(verde);
