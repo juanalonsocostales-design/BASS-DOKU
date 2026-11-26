@@ -741,69 +741,53 @@ do {
             posicionVerde
         );
 
-    const midiObjetivo =
-        midiVerde +
-        semitonosIntervalo;
+const midiObjetivo =
+    midiVerde +
+    semitonosIntervalo;
 
-   posicionAzul =
-    obtenerPosicionPatron(
-        posicionVerde,
-        intervaloCorrecto
+const posicionesPosibles =
+    buscarPosicionesMidi(
+        midiObjetivo
+    );
+const posicionesFiltradas =
+    filtrarPorNivel(
+        posicionesPosibles,
+        posicionVerde.traste
+    );
+const posicionesValidas =
+    posicionesFiltradas.filter(
+        pos =>
+            !(
+                pos.cuerda === posicionVerde.cuerda &&
+                pos.traste === posicionVerde.traste
+            )
     );
 
-console.log(
-    "AZUL",
-    posicionAzul
-);
+if(
+    posicionesValidas.length === 0
+){
+    posicionAzul = null;
+}
+else{
 
-console.log(
-    "AZUL",
-    posicionAzul
-);
+    posicionAzul =
+    posicionesValidas[
+            Math.floor(
+                Math.random() *
+posicionesValidas.length
+            )
+        ];
 
 }
+
+
+}
+
 while(!posicionAzul);
 
 
-    // Calcular intervalo
-    const semitonos = calcularIntervalo(
-    posicionVerde,
-    posicionAzul
-);
-
-intervaloCorrecto =
-    semitonosANombre(semitonos);
-console.log(
-    "VERDE OBJETO",
-    posicionVerde
-);
-
-console.log(
-    "AZUL OBJETO",
-    posicionAzul
-);    
-  
-console.log("VERDE", posicionVerde);
-
-console.log(
-    "MIDI VERDE",
-    obtenerMidi(posicionVerde)
-);
-
-console.log("AZUL", posicionAzul);
-
-console.log(
-    "MIDI AZUL",
-    obtenerMidi(posicionAzul)
-);
-
-console.log(
-    "INTERVALO",
-    intervaloCorrecto
-);
     // Colocar los puntos
-    console.log("VERDE", posicionVerde);
-console.log("AZUL", posicionAzul);
+    
     colocarNota(
         document.getElementById("tonica"),
         posicionVerde
