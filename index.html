@@ -755,25 +755,13 @@ const posicionesFiltradas =
         posicionesPosibles,
         posicionVerde.traste
     );
-const posicionesOtrasCuerdas =
-    posicionesFiltradas.filter(
-        pos => pos.cuerda !== posicionVerde.cuerda
-    );
-const posicionesValidas =
-    posicionesFiltradas;
-
 if(
-    posicionesOtrasCuerdas.length > 0
+    posicionesFiltradas.length === 0
 ){
-    posicionAzul =
-        posicionesOtrasCuerdas[
-            Math.floor(
-                Math.random() *
-                posicionesOtrasCuerdas.length
-            )
-        ];
+    posicionAzul = null;
 }
 else{
+
     posicionAzul =
         posicionesFiltradas[
             Math.floor(
@@ -781,8 +769,10 @@ else{
                 posicionesFiltradas.length
             )
         ];
-}
 
+}
+    
+}
 while(!posicionAzul);
 
 
@@ -797,6 +787,7 @@ while(!posicionAzul);
         document.getElementById("notaAzul"),
         posicionAzul
     );
+    
 }
 
 // ======================================
