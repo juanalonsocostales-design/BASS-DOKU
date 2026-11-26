@@ -565,15 +565,27 @@ function semitonosANombre(semitonos){
 
 function posicionAleatoria() {
 
-    return {
+const cuerdasProbables = [
+    0,
+    1,1,1,
+    2,2,2,
+    3
+];
 
-        cuerda:
-            Math.floor(Math.random() * 4),
+return {
 
-        traste:
-            Math.floor(Math.random() * 15)
+    cuerda:
+        cuerdasProbables[
+            Math.floor(
+                Math.random() *
+                cuerdasProbables.length
+            )
+        ],
 
-    };
+    traste:
+        Math.floor(Math.random() * 15)
+
+};
 }
 function obtenerPosicionPatron(
     verde,
