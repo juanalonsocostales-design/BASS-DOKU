@@ -755,28 +755,32 @@ const posicionesFiltradas =
         posicionesPosibles,
         posicionVerde.traste
     );
-
+const posicionesOtrasCuerdas =
+    posicionesFiltradas.filter(
+        pos => pos.cuerda !== posicionVerde.cuerda
+    );
 const posicionesValidas =
     posicionesFiltradas;
 
 if(
-    posicionesValidas.length === 0
+    posicionesOtrasCuerdas.length > 0
 ){
-    posicionAzul = null;
-}
-else{
-
     posicionAzul =
-    posicionesValidas[
+        posicionesOtrasCuerdas[
             Math.floor(
                 Math.random() *
-posicionesValidas.length
+                posicionesOtrasCuerdas.length
             )
         ];
-
 }
-
-
+else{
+    posicionAzul =
+        posicionesFiltradas[
+            Math.floor(
+                Math.random() *
+                posicionesFiltradas.length
+            )
+        ];
 }
 
 while(!posicionAzul);
