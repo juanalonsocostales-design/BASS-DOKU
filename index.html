@@ -773,15 +773,28 @@ const posicionesSuperiores =
     posicionesFiltradas.filter(
         pos => pos.cuerda > posicionVerde.cuerda
     );
-
+    
+const posicionesSuperioresCercanas =
+    posicionesFiltradas.filter(
+        pos => pos.cuerda === posicionVerde.cuerda + 1
+    );
+    
 if(
-    posicionesFiltradas.length === 0
+    posicionesSuperioresCercanas.length > 0 &&
+    Math.random() < 0.7
 ){
-    posicionAzul = null;
+
+    posicionAzul =
+        posicionesSuperioresCercanas[
+            Math.floor(
+                Math.random() *
+                posicionesSuperioresCercanas.length
+            )
+        ];
+
 }
 else if(
-    posicionesSuperiores.length > 0 &&
-    Math.random() < 0.8
+    posicionesSuperiores.length > 0
 ){
 
     posicionAzul =
