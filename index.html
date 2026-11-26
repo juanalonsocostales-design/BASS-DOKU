@@ -356,7 +356,9 @@ const patrones = {
 ],
 
 "4":[
-    {cuerda:1,traste:0}
+    {cuerda:1,traste:0},
+    {cuerda:0,traste:5},
+    {cuerda:-1,traste:5}
 ],
 
 "4#":[
@@ -368,7 +370,9 @@ const patrones = {
 ],
 
 "5":[
-    {cuerda:1,traste:2}
+    {cuerda:1,traste:2},
+    {cuerda:0,traste:7},
+    {cuerda:-1,traste:9}
 ],
 
 "5#":[
@@ -549,8 +553,16 @@ function obtenerPosicionPatron(
     verde,
     nombreIntervalo
 ){
-    const patron =
-        patrones[nombreIntervalo][0];
+    const listaPatrones =
+    patrones[nombreIntervalo];
+
+const patron =
+    listaPatrones[
+        Math.floor(
+            Math.random() *
+            listaPatrones.length
+        )
+    ];
 
     const nuevaCuerda =
         verde.cuerda +
