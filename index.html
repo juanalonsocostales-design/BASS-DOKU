@@ -755,6 +755,16 @@ const posicionesFiltradas =
         posicionesPosibles,
         posicionVerde.traste
     );
+    
+console.table(
+    posicionesFiltradas
+);
+
+console.log(
+    "VERDE",
+    posicionVerde
+);
+    
 const posicionesSuperiores =
     posicionesFiltradas.filter(
         pos => pos.cuerda > posicionVerde.cuerda
