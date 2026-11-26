@@ -473,6 +473,15 @@ function buscarPosicionesMidi(midiObjetivo){
     return posiciones;
 
 }
+function obtenerSemitonosIntervalo(nombreIntervalo){
+
+    const intervalo = intervalos.find(
+        i => i.nombre === nombreIntervalo
+    );
+
+    return intervalo.semitonos;
+
+}    
 function calcularIntervalo(verde, azul) {
 
     const notaVerde = obtenerMidi(verde);
