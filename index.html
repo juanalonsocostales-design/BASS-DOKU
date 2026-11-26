@@ -754,14 +754,8 @@ const posicionesFiltradas =
         posicionesPosibles,
         posicionVerde.traste
     );
-const posicionesValidas =
-    posicionesFiltradas.filter(
-        pos =>
-            !(
-                pos.cuerda === posicionVerde.cuerda &&
-                pos.traste === posicionVerde.traste
-            )
-    );
+cconst posicionesValidas =
+    posicionesFiltradas;
 
 if(
     posicionesValidas.length === 0
