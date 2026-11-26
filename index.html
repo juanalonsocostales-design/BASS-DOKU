@@ -323,13 +323,10 @@ const intervalos = [
     { nombre: "b3", semitonos: 3 },
     { nombre: "3", semitonos: 4 },
     { nombre: "4", semitonos: 5 },
-    { nombre: "4#", semitonos: 6 },
-    { nombre: "b5", semitonos: 6 },
+    { nombre: "4#/b5", semitonos: 6 },
     { nombre: "5", semitonos: 7 },
-    { nombre: "5#", semitonos: 8 },
-    { nombre: "b6", semitonos: 8 },
-    { nombre: "6", semitonos: 9 },
-    { nombre: "bb7", semitonos: 9 },
+    { nombre: "5#/b6", semitonos: 8 },
+    { nombre: "6/bb7", semitonos: 9 },
     { nombre: "b7", semitonos: 10 },
     { nombre: "7", semitonos: 11 }
 ];
@@ -513,19 +510,19 @@ function calcularIntervalo(verde, azul) {
 function semitonosANombre(semitonos){
 
     const mapa = {
-        0:"T",
-        1:"b2",
-        2:"2",
-        3:"b3",
-        4:"3",
-        5:"4",
-        6:"b5",
-        7:"5",
-        8:"b6",
-        9:"6",
-        10:"b7",
-        11:"7"
-    };
+    0:"T",
+    1:"b2",
+    2:"2",
+    3:"b3",
+    4:"3",
+    5:"4",
+    6:"4#/b5",
+    7:"5",
+    8:"5#/b6",
+    9:"6/bb7",
+    10:"b7",
+    11:"7"
+};
 
     return mapa[semitonos];
 }
