@@ -707,7 +707,14 @@ do {
     const midiObjetivo =
         midiVerde +
         semitonosIntervalo;
-
+const posicionesPosibles =
+    buscarPosicionesMidi(
+        midiObjetivo
+    );
+    console.log(
+    "POSICIONES POSIBLES",
+    posicionesPosibles
+);
    posicionAzul =
     obtenerPosicionPatron(
         posicionVerde,
